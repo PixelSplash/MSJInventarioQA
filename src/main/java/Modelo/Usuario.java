@@ -106,7 +106,6 @@ public class Usuario {
     }
 
     public boolean isIsAdmin() {
-        System.out.println(isAdmin);
         return isAdmin;
     }
 
