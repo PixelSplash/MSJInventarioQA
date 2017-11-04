@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>MJSInventario</title>
+	  <meta charset="utf-8"/>
+	  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css"/>
+	  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script> -->
+	  <!-- <script src="/home/oskr/Desktop/bootstrap-3.3.7-dist/css/bootstrap.css"></script> -->
+
+	</head>
+
+    <body class="" style="">
+
+      <nav class="navbar navbar-default">
+        <div class="container">
+
+          <div class="navbar-header">
+            <a class="navbar-brand" href="pagPrincipal">MJSInventario</a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            
+            <ul th:if="${usuario.isAdmin ==  true}" class="nav navbar-nav">
+              <!-- <li class="active"> -->
+              <li><a href="AgregarObjeto">Agregar Objeto<span class="sr-only">(current)</span></a></li>
+              <li><a href="Usuarios">Usuarios</a></li>
+              <li><a href="Historial">Historial</a></li>
+              <li><a href="#">Configuración</a></li>    
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><p class="navbar-text">
+                              <span class="glyphicon glyphicon-user"></span>
+                              <span th:text="${usuario.getNombreUsuario()}"></span>
+                            </p>
+                          </li>
+              <li><a href="salir">Salir</a></li>
+            </ul>
+
+          </div>
+        </div>
+      </nav>
+
+    <div class="container">
+      <h1 align ="center">Información Objeto</h1>
+      <br></br>
+
+
+
+      <!-- <div class ="well bs-component" > -->
+      <!-- <div class="row"> -->
+      <div class="jumbotron">
+        <form action="#" th:action="@{/VerObjeto}" th:object="${objeto}" method="post">
+
+          <input type="hidden" th:field="*{idObjeto}" />
+
+					<div class="row">
+		        <div class="col-xs-6 form-group">
+	            <label>Objeto</label>
+							<input disabled="" class="form-control" placeholder="Objeto" th:field="*{nombreObjeto}" type="text"/>
+		        </div>
+
+            <div class="col-xs-6 form-group">
+              <label></label> <!--macgiver -->
+              <center>
+	               <a th:onclick="'javascript:descargar(__${indice}__);'" class="btn btn-success">Descargar</a>
+              </center>
+            </div>
+
+					</div>
+
+					<br></br>
+
+					<div class="row">
+
+		        <div class="col-xs-6 form-group">
+	            <label>Forma de Adquisición</label>
+	            <input disabled="" class="form-control" th:field="*{formaAdquisicion}" type="text"/>
+		        </div>
+
+						<div class="col-xs-6 form-group">
+	            <label>Valor Económico</label>
+	            <input disabled="" class="form-control" th:field="*{valorEconomico}" type="text"/>
+		        </div>
+
+		    	</div>
+
+					<div class="row">
+						<div class="col-xs-6 form-group">
+	            <label>Fecha Ingreso</label>
+	            <input disabled="" class="form-control" th:field="*{fechaIngreso}" type="text"/>
+		        </div>
+						<div class="col-xs-6 form-group">
+	            <label>Fecha Inventario</label>
+	            <input disabled="" class="form-control" th:field="*{fechaInventario}" type="text"/>
+		        </div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-6 form-group">
+	            <label>Fecha Catálogo</label>
+	            <input disabled="" class="form-control" th:field="*{fechaCatalogo}" type="text"/>
+		        </div>
+						<div class="col-xs-6 form-group">
+	            <label>Número Catálogo</label>
+	            <input disabled="" class="form-control" th:field="*{numCatalogo}" type="text"/>
+		        </div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-6 form-group">
+	            <label>Número de Registro</label>
+	            <input disabled="" class="form-control" th:field="*{numRegistro}" type="text"/>
+		        </div>
+						<div class="col-xs-6 form-group">
+	            <label>Número Inventario</label>
+	            <input disabled="" class="form-control" th:field="*{numInventario}" type="text"/>
+		        </div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-6 form-group">
+	            <label>Fuente</label>
+	            <input disabled="" class="form-control" th:field="*{nombreFuente}" type="text"/>
+		        </div>
+						<div class="col-xs-6 form-group">
+	            <label>Dirección fuente</label>
+	            <input disabled="" class="form-control" th:field="*{direccionFuente}" type="text"/>
+		        </div>
+					</div>
+
+					<br></br>
+					<h2>Características</h2>
+
+					<div class="row">
+						<div class="col-xs-12 form-group">
+	            <div class="row">
+                <label class="col-xs-3">Alto</label>
+								<label class="col-xs-3">Ancho</label>
+								<label class="col-xs-3">Largo</label>
+								<label class="col-xs-3">Diámetro</label>
+	            </div>
+	            <div class="row">
+                <div class="col-xs-3 col-sm-3">
+                    <input disabled="" class="form-control" placeholder="Alto" th:field="*{alto}" type="text"/>
+                </div>
+                <div class="col-xs-3 col-sm-3">
+                    <input disabled="" class="form-control" placeholder="Ancho" th:field="*{ancho}" type="text"/>
+                </div>
+								<div class="col-xs-3 col-sm-3">
+                    <input disabled="" class="form-control" placeholder="Largo" th:field="*{largo}" type="text"/>
+                </div>
+								<div class="col-xs-6 col-sm-3">
+                    <input disabled="" class="form-control" placeholder="Diámetro" th:field="*{diametro}" type="text"/>
+                </div>
+
+		            </div>
+		        </div>
+	        </div>
+
+
+					<div class="row">
+						<div class="col-xs-6 form-group">
+	            <label>Espesor</label>
+	            <input disabled="" class="form-control" th:field="*{espesor}" type="text"/>
+		        </div>
+						<div class="col-xs-6 form-group">
+		            <label>Peso</label>
+		            <input disabled="" class="form-control" th:field="*{peso}" type="text"/>
+		        </div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-6 form-group">
+	            <label>Procedencia</label>
+	            <textarea disabled="disabled" rows="3" class="form-control" th:field="*{procedencia}"> </textarea>
+		        </div>
+						<div class="col-xs-6 form-group">
+	            <label>Materia y Técnica</label>
+	            <textarea disabled="disabled" rows="3" class="form-control" th:field="*{materiaYTecnica}"> </textarea>
+		        </div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-6 form-group">
+	            <label>Autor</label>
+	            <input disabled="" class="form-control" th:field="*{autor}" type="text"/>
+		        </div>
+						<div class="col-xs-6 form-group">
+	            <label>Epoca</label>
+	            <input disabled="" class="form-control" th:field="*{epoca}" type="text"/>
+		        </div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-6 form-group">
+	            <label>Número de negativo</label>
+	            <input disabled="" class="form-control" th:field="*{numeroNegativo}" type="text"/>
+		        </div>
+					</div>
+
+					<br></br>
+					<h2>Descripción</h2>
+
+					<div class="row">
+						<div class="col-xs-12 form-group">
+	            <textarea disabled="disabled" rows="4" class="form-control" th:field="*{descripcion}"> </textarea>
+		        </div>
+					</div>
+
+					<h2>Documentación</h2>
+
+					<div class="row">
+						<div class="col-xs-12 form-group">
+	            <textarea disabled="disabled" rows="4" class="form-control" th:field="*{documentacion}"> </textarea>
+		        </div>
+					</div>
+
+					<h2>Observaciones</h2>
+
+					<div class="row">
+						<div class="col-xs-12 form-group">
+	            <textarea disabled="disabled" rows="4" class="form-control" th:field="*{observaciones}"> </textarea>
+		        </div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-12 form-group">
+		            <div class="row">
+		                <label class="col-xs-3">Recibió</label>
+										<label class="col-xs-3">Inventarió</label>
+										<label class="col-xs-3">Catalogó</label>
+										<label class="col-xs-3">Aprobó</label>
+		            </div>
+		            <div class="row">
+		                <div class="col-xs-3 col-sm-3">
+		                    <input disabled="" class="form-control" placeholder="Recibió" th:field="*{recibio}" type="text"/>
+		                </div>
+		                <div class="col-xs-3 col-sm-3">
+		                    <input disabled="" class="form-control" placeholder="Inventarió" th:field="*{inventario}" type="text"/>
+		                </div>
+										<div class="col-xs-3 col-sm-3">
+		                    <input disabled="" class="form-control" placeholder="Catalogó" th:field="*{catalogo}" type="text"/>
+		                </div>
+										<div class="col-xs-6 col-sm-3">
+		                    <input disabled="" class="form-control" placeholder="Aprobó" th:field="*{aprobo}" type="text"/>
+		                </div>
+
+		            </div>
+		        </div>
+	        </div>
+
+					<br></br>
+
+					<div class="row">
+						<div class="col-xs-12 form-group">
+                <button type="reset" class="btn btn-default" onclick="window.location='pagPrincipal'">Cancelar</button>
+                
+                  <a th:if="${usuario.isAdmin ==  true}" th:onclick="'javascript:editar(__${indice}__);'" class="btn btn-primary">Editar</a>
+                  <button th:if="${usuario.isAdmin ==  true}" type="submit"  name="action" value="eliminar" onclick="eliminar()" class="btn btn-danger" style="float: right;">Eliminar</button>
+						</div>
+					</div>
+
+        </form>
+      </div>
+		</div>
+  </body>
+  <script>
+  //    funcion cuando se clickea el boton descargar
+      function descargar(value) {
+          console.log(value);
+          window.location="descarga?ind=" + value; //Referencia (href)
+      }
+      function editar(value) {
+          console.log(value);
+          window.location="EditarObjeto?ind=" + value; //Referencia (href)
+      }
+      function eliminar() {
+          var result = confirm("¿Está seguro de borrar el objeto? No podrá recuperarlo");
+          if (!result) {
+              document.getElementsByName("action")[0].value = "noEliminar";
+          }
+      }
+  </script>
+</html>
